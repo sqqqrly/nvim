@@ -1,3 +1,5 @@
+--- Language Server Protocol config managed by Mason.
+
 return {
     {
         -- Easily manage external editor tooling such as LSP servers, DAP servers, linters, and formatters through a single interface.
