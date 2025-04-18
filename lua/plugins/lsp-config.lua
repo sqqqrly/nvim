@@ -11,7 +11,10 @@ return {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "pyright" }
+                ensure_installed = {   -- Do not include CLI tools like black
+                    "lua_ls",
+                    "pyright",
+                }
             })
         end
     },
