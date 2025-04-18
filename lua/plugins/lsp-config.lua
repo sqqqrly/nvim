@@ -4,6 +4,7 @@ return {
     {
         -- Easily manage external editor tooling such as LSP servers, DAP servers, linters, and formatters through a single interface.
         "williamboman/mason.nvim",
+        lazy = false,
         config = function()
             require("mason").setup()
         end
@@ -11,29 +12,32 @@ return {
     {
         -- Closes some gaps that exist between mason.nvim and lspconfig. Provides the 'ensure_installed' property used below.
         "williamboman/mason-lspconfig.nvim",
-        config = function()
-            require("mason-lspconfig").setup({
-                ensure_installed = {   -- Do not include CLI tools like black
-                    "lua_ls",
-                    "pyright",
-                }
-            })
-        end
+        lazy = false,
+        opts = {
+            auto_install = true,
+        },
     },
     {
         -- nvim-lspconfig is a "data only" repo, providing basic, default Nvim LSP client configurations for various LSP servers.
         -- :help vim.lsp.buf
         "neovim/nvim-lspconfig",
+        lazy = false,
         config = function()
-            local lspconfig = require("lspconfig")
+            local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-            lspconfig.lua_ls.setup({})
-            lspconfig.pyright.setup({})
+            local lspconfig = require("lspconfig")
+            lspconfig.lua_ls.setup({
+                capabilities = capabilities
+            })
+            lspconfig.pyright.setup({
+                capabilities = capabilities
+            })
 
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
             vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
-            vim.keymap.set({'n', 'v'}, '<leader>ca', vim.lsp.buf.definition, {})
-        end
-    }
+            vim.keymap.set('n', 'gr', vim.lsp.buf.references, {})
+            vim.keymap.set('n', 'ca', vim.lsp.buf.code_action, {})
+        end,
+    },
 }
 

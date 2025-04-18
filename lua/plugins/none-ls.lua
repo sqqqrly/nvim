@@ -17,6 +17,6 @@ return {
         })
 
         vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
-        vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float)
+        vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, {})
     end,
 }

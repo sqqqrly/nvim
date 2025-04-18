@@ -16,8 +16,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local opts = {}
-
 -- See nvim/lua/plugins/.
 -- Any lua file in nvim/lua/plugins/ that returns a lua table
 -- will be contcatenated by Lazy into one large lua table automagically.
