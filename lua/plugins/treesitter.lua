@@ -13,9 +13,8 @@ return {
       })
 
       -- Log initial fold module state
-      local ts_configs = require("nvim-treesitter.configs")
-      local fold_module = ts_configs.get_module("fold")
-      local fold_enabled = fold_module and fold_module.enable or false
+      -- local fold_module = ts_configs.get_module("fold")
+      -- local fold_enabled = fold_module and fold_module.enable or false
       -- vim.api.nvim_echo({
       --   { "Treesitter: Initial fold module state: " .. vim.inspect(fold_module), "Normal" },
       --   { "\nTreesitter: Initial fold module enabled: " .. (fold_enabled and "true" or "false"), "Normal" },
@@ -28,11 +27,11 @@ return {
           -- vim.api.nvim_echo({{ "Treesitter: Autocommand triggered", "Normal" }}, true, {})
 
           local parser = vim.treesitter.get_parser(0, "python")
-          local parser_status = parser and "Parser loaded" or "Parser failed to load"
+          -- local parser_status = parser and "Parser loaded" or "Parser failed to load"
           -- vim.api.nvim_echo({{ "Treesitter: " .. parser_status, "Normal" }}, true, {})
 
           local fold_module = ts_configs.get_module("fold")
-          local fold_enabled = fold_module and fold_module.enable or false
+          -- local fold_enabled = fold_module and fold_module.enable or false
           -- vim.api.nvim_echo({
           --   { "Treesitter: Fold module state: " .. vim.inspect(fold_module), "Normal" },
           --   { "\nTreesitter: Fold module enabled: " .. (fold_enabled and "true" or "false"), "Normal" },
@@ -44,10 +43,11 @@ return {
           vim.opt_local.foldenable = true
           vim.opt_local.foldlevel = 99
           vim.opt_local.foldminlines = 2
-          vim.opt_local.foldcolumn = "2"
-          -- vim.opt_local.foldcolumn = "auto" -- Dynamic fold column (Neovim 0.10+)
+          -- vim.opt_local.foldcolumn = "2"
+          vim.opt_local.foldcolumn = "auto" -- Dynamic fold column (Neovim 0.10+)
           vim.opt_local.fillchars = "fold: ,foldopen:▽,foldclose:▷" -- Hex characters
           vim.api.nvim_set_hl(0, "FoldColumn", { fg = "#883333", bg = "NONE" })
+          vim.opt_local.signcolumn = "yes:1" -- Always show one sign column
 
           local ok, err = pcall(vim.treesitter.start)
           -- vim.api.nvim_echo({
