@@ -44,7 +44,10 @@ return {
           vim.opt_local.foldenable = true
           vim.opt_local.foldlevel = 99
           vim.opt_local.foldminlines = 2
-          vim.opt_local.foldcolumn = "1"
+          vim.opt_local.foldcolumn = "2"
+          -- vim.opt_local.foldcolumn = "auto" -- Dynamic fold column (Neovim 0.10+)
+          vim.opt_local.fillchars = "fold: ,foldopen:▽,foldclose:▷" -- Hex characters
+          vim.api.nvim_set_hl(0, "FoldColumn", { fg = "#883333", bg = "NONE" })
 
           local ok, err = pcall(vim.treesitter.start)
           -- vim.api.nvim_echo({
